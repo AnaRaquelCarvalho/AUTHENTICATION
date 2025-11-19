@@ -1,9 +1,32 @@
-<% content_for :title, "New article" %>
+<div class="max-w-md mx-auto">
+  <h2 class="text-2xl font-bold mb-4">LOGIN</h2>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New article</h1>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-4" }) do |f| %>
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
 
-  <%= render "form", article: @article %>
+    <div class="mb-4">
+      <%= f.label :password, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
 
-  <%= link_to "Back to articles", articles_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    <% if devise_mapping.rememberable? %>
+      <div class="mb-4">
+        <label class="flex items-center">
+          <%= f.check_box :remember_me, class: "form-checkbox mr-2" %>
+          <span class="text-sm">
+            <%= f.label :remember_me, class: "text-gray-700" %>
+          </span>
+        </label>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.submit "Log in", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
+  <% end %>
+
+  <%= render "users/shared/links" %>
 </div>
